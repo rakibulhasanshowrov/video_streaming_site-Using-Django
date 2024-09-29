@@ -11,7 +11,7 @@ class UserProfile(models.Model):
     ('student','Student'),
     ('Genaral_user','General User'), 
   ]
-  profile_type=models.CharField(blank=False,choices=type,default="General User")
+  profile_type=models.CharField(max_length=30,blank=False,choices=type,default="General User")
   
   
   def __str__(self):
