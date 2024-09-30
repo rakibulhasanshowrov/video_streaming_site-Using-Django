@@ -26,11 +26,10 @@ def login_user(request):
         print(f'login Accessed')
         messages.success(request, "Login Successfull!")
         return HttpResponseRedirect(reverse('user_handle:homepage'))
-  else: 
-    method=str(request.method)  
-    print(f'Post Not  Accessed & Method:{method}')
-    messages.error(request, "Login Unsuccessfull!")
-    return render(request,'user_handle/login.html',context={'form':form})
+  method=str(request.method)  
+  print(f'Post Not  Accessed & Method:{method}')
+  messages.error(request, "Login Unsuccessfull!")
+  return render(request,'user_handle/login.html',context={'form':form})
    
    
    
@@ -49,12 +48,11 @@ def create_user(request):
       print("UnSuccessfull!")
       return render(request,'user_handle/user_registration.html',context={
       'form':form})
-  else:
-    method=str(request.method)  
-    print(f'Post Not  Accessed & Method:{method}')  
-    return render(request,'user_handle/user_registration.html',context={
-      'form':form
-    })
+  method=str(request.method)  
+  print(f'Post Not  Accessed & Method:{method}')  
+  return render(request,'user_handle/user_registration.html',context={
+    'form':form
+  })
 
 @login_required     
 def logout_user(request):

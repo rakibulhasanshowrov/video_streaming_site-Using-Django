@@ -16,13 +16,17 @@
     <div class="logo_container"><a href="#"><img class='streamy_home' src="{% static 'img/logo.jfif' %}" alt="Logo"></a></div>
     <nav class="nav_bar">
       <a href="#">Category</a>
+      {%if request.user.is_superuser%}
+      <a href="{%url 'app_video:add_video'%}">Enlist Video</a>
+      {%else%}
       <a href="#">About Us</a>
+      {%endif%}
     </nav>
     <div class="search_bar">
       <form method="GET" action="#">
-          <input type="text" name="q" placeholder="Enter your text" id="search_input"></input>
+          <input type="text" name="q" placeholder="Enter your text" id="search_input">
           <button class="search_icon" type="submit" title="Search">Search</button>
-      </for>
+      </form>
   </div>
     <div class="action_bar">
         {%if user.is_authenticated %}
@@ -57,19 +61,20 @@
     
   </header>
   <main>
-    {%if messeges%}
+    {% if messages %}
     <div class="message_container">
-      {%for message in messeges %}
-      <div {%if message.tags%} class="{{message.tags}}" {%endif%}>
-        {{message}}
-      </div>
-      {%endfor%}
+        {% for message in messages %}
+            {% if forloop.last %}
+                <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                    {{ message }}
+                </div>
+            {% endif %}
+        {% endfor %}
     </div>
-    {%endif%}
+    {% endif %}
    {% block content %}
    {%endblock%}
-  </main>
-  <footer>
+   <footer></footer>
     <div class="copyright">
       <pre>&copy; 2024 <a href="#">www.streamy.com</a> All rights reserved.
         Developed By Rakibul Hasan Showrov
@@ -77,5 +82,18 @@
       </pre>
     </div>
   </footer>
+  </main>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const messageContainer = document.querySelector('.message_container');
+    if (messageContainer) {
+      setTimeout(function() {
+        messageContainer.remove();
+      }, 5000); // Hides the message after 5 seconds
+    }
+  });
+
+  </script>
 </body>
 </html>

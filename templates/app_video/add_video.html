@@ -1,0 +1,23 @@
+{% extends 'base.html'%}
+{%load crispy_forms_tags %}
+{%load static%}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/addvideo.css' %}">
+{%endblock%}
+{%block title%}Add Video{%endblock%}
+{%block content%}
+<div class="add_video_container">
+  <div class="form_container">
+    <h2>Add Video</h2>
+    <form method='POST'>
+      {%csrf_token%}
+      {{ form|crispy }}
+      <button class='add_video_button' type="submit">Submit</button>
+    </form>
+    <br>
+  </div>
+  
+</div>
+
+
+{%endblock%}
