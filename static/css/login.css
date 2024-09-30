@@ -38,6 +38,7 @@ button{
   height: 35px;
   background-color: rgb(155, 248, 114);
   border-radius: 10px;
+  font-weight: bold;
 
 }
 button a{

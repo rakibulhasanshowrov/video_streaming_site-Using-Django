@@ -11,13 +11,10 @@
     <form method="POST">
       {%csrf_token%}
       {{ form|crispy }}
+      <button type="submit">Submit</button>
     </form>
-    <button type="submit"><a href="{%url 'user_handle:homepage'%}">Submit</a></button>
     <br>
     <p>Already have an account?<a href="{%url 'user_handle:login_user' %}">Login</a></p>
-  </div>
-  
+  </div> 
 </div>
-
-
 {%endblock%}

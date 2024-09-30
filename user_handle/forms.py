@@ -14,6 +14,9 @@ class loginForm(AuthenticationForm):
         label='Password:',
         widget=forms.PasswordInput(attrs={'placeholder': 'Password','class': 'form_input'})
     )
+  class Meta:
+      model = User
+      fields=['username','password']
   
 class signupForm(UserCreationForm):
   email=forms.EmailField(required=True,label='Email:',widget=forms.TextInput(attrs={'placeholder':"Email",'class': 'form_input'}))
