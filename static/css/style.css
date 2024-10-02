@@ -12,6 +12,9 @@ header{
   border-bottom: 1px solid #b6b1b1;
   
 }
+
+
+
 .logo_container{
   margin-left: 5%;
 }
@@ -111,14 +114,7 @@ border-radius: 50px;
 }
 
 
-
-
-
-
 footer{
-  position: absolute;
-  left: 0;
-  bottom: 0;
   width: 100%;
   background-color: rgb(241, 241, 241); 
   text-align: center; 
@@ -132,3 +128,6 @@ footer{
   padding: 15px;
 
 }
+
+
+

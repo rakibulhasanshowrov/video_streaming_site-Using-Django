@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+{%load crispy_forms_tags %}
+{% load custom_filters %}
+{%load static%}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/video_list.css' %}">
+{%endblock%}
+{%block content%}
+<div class="card_container">
+  {%for v in video%}
+  <div class="card">
+      <div class="img_container">
+          <img class='thumbnail_size' src="{{v.thumbnail}}"
+              alt="Thumbnail">
+      </div>
+      <div class="title_container">
+          <a href="#">{{v.title|range_filter}}</a>
+      </div>
+      <div class="video_category">
+          <strong>Category: {{v.category}}</strong>
+      </div>
+      <div class="video_details">
+          <button type="button" >See Details</button>
+      </div>
+  </div>
+  {%endfor%}
+</div>
+
+{%endblock%}

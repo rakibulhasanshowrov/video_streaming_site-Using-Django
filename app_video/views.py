@@ -6,7 +6,14 @@ from django.contrib import messages
 #form
 from app_video.forms import VideoForm
 from django.contrib.auth import logout
+from app_video.models import Video
 # Create your views here.
+
+def homepage(request):
+  video=Video.objects.all()
+    
+  return render(request,'app_video/video_list.html',context={'video':video})
+
 def get_youtube_thumbnail(url):
     # Extract the video ID from the URL
     video_id = url.split('v=')[1]

@@ -7,4 +7,5 @@ urlpatterns = [
     path('add_video/',views.add_video,name='add_video'),
     # path('',include('user_handle.urls')),
     # path('video/',include('app_video.urls')),  
+    path('',views.homepage,name='homepage'),
 ]
