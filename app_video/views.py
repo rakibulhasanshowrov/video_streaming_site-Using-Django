@@ -7,10 +7,11 @@ from django.contrib import messages
 from app_video.forms import VideoForm
 from django.contrib.auth import logout
 from app_video.models import Video
+from django.db.models import Q
 # Create your views here.
 
 def homepage(request):
-  video=Video.objects.all()
+  video=Video.objects.all().order_by('?')
     
   return render(request,'app_video/video_list.html',context={'video':video})
 
@@ -46,15 +47,27 @@ def add_video(request):
             video.thumbnail = thumbnail  # Assign thumbnail before saving the instance
             video.save()  # Now save the instance
             messages.success(request, "Video added to the database successfully!!")
-            return HttpResponseRedirect(reverse('user_handle:homepage'))
+            return HttpResponseRedirect(reverse('app_video:homepage'))
         else:
             messages.error(request, "There was an error adding the video. Please try again.")
     
     return render(request, 'app_video/add_video.html', context={'form': form})
         
         
-        
-        
+def vid_search(request):
+    query=request.GET.get('q')
+    if query:
+        video=Video.objects.filter(
+            Q(title__icontains=query) |  # Case-insensitive search in title
+            Q(category__icontains=query)  # Case-insensitive search in category
+            )
+        return render(request,'app_video/video_list.html',context={'video':video})
+    
+    else:
+        messages.error(request,"Nothing Found!!")
+        return HttpResponseRedirect(reverse('app_video:homepage'))
+    
+         
   
     
   

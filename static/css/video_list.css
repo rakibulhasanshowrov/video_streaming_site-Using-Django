@@ -1,6 +1,7 @@
 .card_container{
   height: auto;
   width: auto;
+  min-height: 70vh;
   margin:2% 2% 0px 2%;
   background-color: rgb(249, 249, 249);
   border-radius: 10px;

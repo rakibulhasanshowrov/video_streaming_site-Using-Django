@@ -13,7 +13,7 @@
 </head>
 <body>
   <header>
-    <div class="logo_container"><a href="#"><img class='streamy_home' src="{% static 'img/logo.jfif' %}" alt="Logo"></a></div>
+    <div class="logo_container"><a href="{%url 'app_video:homepage'%}"><img class='streamy_home' src="{% static 'img/logo.jfif' %}" alt="Logo"></a></div>
     <nav class="nav_bar">
       <a href="#">Category</a>
       {%if request.user.is_superuser%}
@@ -23,7 +23,7 @@
       {%endif%}
     </nav>
     <div class="search_bar">
-      <form method="GET" action="#">
+      <form method="GET" action="{%url 'app_video:vid_search'%}">
           <input type="text" name="q" placeholder="Enter your text" id="search_input">
           <button class="search_icon" type="submit" title="Search">Search</button>
       </form>

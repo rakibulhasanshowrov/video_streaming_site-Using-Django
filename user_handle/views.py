@@ -8,8 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 # Create your views here.
-def homepage(request):
-  return render(request,'base.html',context={})
+# def homepage(request):
+#   return render(request,'base.html',context={})
 
 def login_user(request):
   form=loginForm()
@@ -25,11 +25,9 @@ def login_user(request):
         login(request,user)
         print(f'login Accessed')
         messages.success(request, "Login Successfull!")
-        return HttpResponseRedirect(reverse('user_handle:homepage'))
-  method=str(request.method)  
-  print(f'Post Not  Accessed & Method:{method}')
-  messages.error(request, "Login Unsuccessfull!")
-  return render(request,'user_handle/login.html',context={'form':form})
+        return HttpResponseRedirect(reverse('app_video:homepage'))
+  else:
+    return render(request,'user_handle/login.html',context={'form':form})
    
    
    
@@ -43,7 +41,7 @@ def create_user(request):
         user_profile.save()
         print("Account Created Successfully!")
         messages.success(request, "Account Created Successfully!")
-        return HttpResponseRedirect(reverse('user_handle:homepage'))
+        return HttpResponseRedirect(reverse('app_video:homepage'))
     else:
       print("UnSuccessfull!")
       return render(request,'user_handle/user_registration.html',context={
@@ -58,4 +56,4 @@ def create_user(request):
 def logout_user(request):
   logout(request)
   messages.success(request, "You have successfully logged out.")
-  return HttpResponseRedirect(reverse('user_handle:homepage'))
+  return HttpResponseRedirect(reverse('app_video:homepage'))
