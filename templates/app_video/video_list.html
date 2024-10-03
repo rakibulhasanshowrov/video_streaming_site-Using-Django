@@ -14,13 +14,15 @@
               alt="Thumbnail">
       </div>
       <div class="title_container">
-          <a href="#">{{v.title|range_filter}}</a>
+          <a href="{% url 'app_video:vid_details' pk=v.pk %}">{{v.title|range_filter}}</a>
       </div>
       <div class="video_category">
           <strong>Category: {{v.category}}</strong>
       </div>
       <div class="video_details">
-          <button type="button" >See Details</button>
+        <a href="{% url 'app_video:vid_details' pk=v.pk %}">
+            <button type="button">See Details</button>
+        </a>
       </div>
   </div>
   {%endfor%}

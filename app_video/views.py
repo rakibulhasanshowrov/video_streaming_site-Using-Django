@@ -12,7 +12,6 @@ from django.db.models import Q
 
 def homepage(request):
   video=Video.objects.all().order_by('?')
-    
   return render(request,'app_video/video_list.html',context={'video':video})
 
 def get_youtube_thumbnail(url):
@@ -67,6 +66,14 @@ def vid_search(request):
         messages.error(request,"Nothing Found!!")
         return HttpResponseRedirect(reverse('app_video:homepage'))
     
+def vid_details(request,pk):
+    video=Video.objects.all().exclude(pk=pk)
+    vid_q=Video.objects.get(pk=pk)
+    print(vid_q)
+    return render(request,'app_video/video_details.html',context={
+        'video':video,
+        'vid_q':vid_q,
+    })
          
   
     
