@@ -8,21 +8,30 @@
 {%block content%}
 <div class="page_container">
   <div class="details_container">
-   <div class="stream_video">
-    <iframe  src="https://www.youtube.com/embed/{{vid_q.link|video_id}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-   </div>
-   <div class="vid_title">
-    <strong>{{vid_q.title}}</strong>
-   </div>
-   <div class="category">
-    Category: {{vid_q.category}}
-   </div>
+    <div class="stream_video">
+      <iframe src="https://www.youtube.com/embed/{{vid_q.link|video_id}}" frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="vid_title">
+      <strong>{{vid_q.title}}</strong>
+    </div>
+    <div class="category">
+      Category: {{vid_q.category}}
+    </div>
   </div>
 
   <div class="video_list_container">
-   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia assumenda adipisci magni labore obcaecati veniam quaerat itaque sit. Eius odit voluptatum esse obcaecati culpa! Libero repellat porro cum? Nemo, explicabo!</p>
+    {%for v in video%}
+    <div class="card">
+      <div class="img_container">
+        <img src="{{v.thumbnail}}" alt="Thumbnail">
+      </div>
+      <div class="vid_info">
+        <a href="{% url 'app_video:vid_details' pk=v.pk %}">{{v.title|range_filter}}</a>
+        <strong>Category: {{v.category}}</strong>
+      </div>
+    </div>
+    {%endfor%}
   </div>
-
 </div>
-
 {%endblock%}

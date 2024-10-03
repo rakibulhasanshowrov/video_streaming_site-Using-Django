@@ -67,7 +67,7 @@ def vid_search(request):
         return HttpResponseRedirect(reverse('app_video:homepage'))
     
 def vid_details(request,pk):
-    video=Video.objects.all().exclude(pk=pk)
+    video=Video.objects.all().exclude(pk=pk).order_by('?')
     vid_q=Video.objects.get(pk=pk)
     print(vid_q)
     return render(request,'app_video/video_details.html',context={
