@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponseRedirect
+from django.shortcuts import render,HttpResponseRedirect,get_object_or_404
 from user_handle.forms import loginForm,signupForm
 from django.contrib.auth import authenticate,login,logout
 from django.urls import reverse_lazy,reverse
@@ -51,6 +51,16 @@ def create_user(request):
   return render(request,'user_handle/user_registration.html',context={
     'form':form
   })
+
+
+
+def userProfile(request):
+  user=request.user
+  profile=get_object_or_404(UserProfile,user=user)
+  print(profile)
+  return render(request,"user_handle/user_profile.html",context={'profile':profile,}
+  )
+
 
 @login_required     
 def logout_user(request):

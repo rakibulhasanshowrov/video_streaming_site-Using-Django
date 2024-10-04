@@ -31,7 +31,7 @@
     <div class="action_bar">
         {%if user.is_authenticated %}
         <div class="action_container">
-          <a href="#">
+          <a href="{%url 'user_handle:profile'%}">
           <span class="material-symbols-outlined">
             person
             </span></a>

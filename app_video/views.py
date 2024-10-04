@@ -25,7 +25,7 @@ def get_youtube_thumbnail(url):
     thumbnail_url = f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg"
     return thumbnail_url
 
-@login_required
+
 def add_video(request):
     # Only allow superusers to access this view
     if not request.user.is_superuser:
@@ -65,7 +65,9 @@ def vid_search(request):
     else:
         messages.error(request,"Nothing Found!!")
         return HttpResponseRedirect(reverse('app_video:homepage'))
-    
+
+
+  
 def vid_details(request, pk):
     # Fetch other videos, excluding the current one
     video = Video.objects.all().exclude(pk=pk).order_by('?')
