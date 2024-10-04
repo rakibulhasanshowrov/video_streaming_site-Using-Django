@@ -5,7 +5,7 @@
 }
 header{
   display: flex;
-  background-color:rgb(241, 208, 208);
+  background-color:rgb(251, 235, 235);
   height: 70px;
   justify-content: space-around ;
   align-items: center;
@@ -38,7 +38,7 @@ border-radius: 50px;
   font-size: 18px;
   font-weight: 500;
   margin:10px;
-  border-bottom: 2px solid rgb(241, 208, 208);
+  border-bottom: 2px solid rgb(251, 235, 235);
 }
 .nav_bar a:hover{
   border-bottom: 2px solid #eb5b62;
@@ -87,7 +87,7 @@ border-radius: 50px;
 .action_container a{
   text-decoration: none;
   color: rgb(1, 11, 8);
-  border-bottom: 2px solid rgb(241, 208, 208);
+  border-bottom: 2px solid rgb(251, 235, 235);
   
 }
 

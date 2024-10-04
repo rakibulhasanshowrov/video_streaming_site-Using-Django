@@ -18,7 +18,40 @@
     <div class="category">
       Category: {{vid_q.category}}
     </div>
+    <br>
+    <hr>
+
+    <div class="comment_count">
+         <h2>No Comments</h2>
+    </div>
+
+    <div class="comment_form_container">
+      <form class='comment_form' action="{%url 'app_video:vid_details' pk=vid_q.pk %}"method="post">
+        {%csrf_token%}
+        {{form|crispy }}
+        <button class='form_input_button' type="submit">Comment</button>
+      </form>
+    </div>
+
+    <div class="comment_container">
+      <div class="user_img">
+        <img src="{% static 'img/default profile.jpg' %}" alt="User Photo">
+      </div>
+      <div class="comment_details">
+        
+        <div class="comment_user">
+             <strong>@rhs</strong> <small>04-10-24</small>
+        </div>
+        <div class="comment_text">
+           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate nobis ratione unde aspernatur aperiam eum soluta, quia velit? Quas veritatis mollitia laborum odio. Cum cupiditate culpa harum nulla deserunt suscipit!</p>
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
+
 
   <div class="video_list_container">
     {%for v in video%}

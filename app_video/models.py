@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 class Video(models.Model):
     # Title of the video (cannot be blank)
@@ -28,4 +28,12 @@ class Video(models.Model):
     def __str__(self):
         return self.title
   
-  
+
+class Comment(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    commented_video=models.ForeignKey(Video,on_delete=models.CASCADE)
+    comment_text=models.TextField(max_length=500,blank=False)
+    comment_date=models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.comment_text or "No Comment"
+

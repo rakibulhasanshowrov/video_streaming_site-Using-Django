@@ -4,9 +4,9 @@ from django.contrib.auth.decorators import login_required
 # Messages
 from django.contrib import messages
 #form
-from app_video.forms import VideoForm
+from app_video.forms import VideoForm,CommentForm
 from django.contrib.auth import logout
-from app_video.models import Video
+from app_video.models import Video,Comment
 from django.db.models import Q
 # Create your views here.
 
@@ -69,12 +69,30 @@ def vid_search(request):
 def vid_details(request,pk):
     video=Video.objects.all().exclude(pk=pk).order_by('?')
     vid_q=Video.objects.get(pk=pk)
-    print(vid_q)
+    comments=Comment.objects.filter(commented_video=vid_q)
+    form=CommentForm()
+    if request.method=="POST":
+        form=CommentForm(data=request.POST)
+        if form.is_valid():
+            comment=form.save(commit=False)
+            comment.user=request.user
+            comment.commented_video=vid_q
+            comment.save()
+            messages.success(request,"Comment Added Successfully!!")
+            return render(request,'app_video/video_details.html',context={
+            'video':video,
+            'vid_q':vid_q,
+            'comments':comments,
+            'form':form,})
+        else:
+            messages.error(request,"Comment Not Added!!")                   
     return render(request,'app_video/video_details.html',context={
         'video':video,
         'vid_q':vid_q,
+        'comments':comments,
+        'form':form
     })
          
-  
+
     
   
