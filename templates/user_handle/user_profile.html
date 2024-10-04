@@ -11,12 +11,25 @@
   <div class="profile_img">
     <img src="/media/{{profile.profile_pic}}" alt="profile_photo">
     <h2>{{profile.user.username|upper}}</h2>
+    <strong>------------------------------------------------</strong>
     <div class="welcome_note">
-      <h2>Welcome Rakib</h2>
-
     </div>
   </div>
   <hr>
+
+  <div class="profile_details_container">
+      <div class="profile_info"> 
+        <h2>Profile Informations:</h2>
+        <hr><br>
+       <h3>Name: <span class="light-text">{{profile.user.username|capfirst}}</span></h3><hr>
+       <h3>Date of Birth: <span class="light-text">{{profile.dob}}</span></h3><hr>
+       <h3>Profile Type: <span class="light-text">{{profile.profile_type|capfirst}}</span></h3><hr>
+       <h3>Parmanent Address:</h3><hr>
+       <h3>Present Address:</h3><hr>
+       <h3>NID Info:</h3><hr>
+       <a href="#" class="profile_edit_link">Update Profile</a>
+      </div>
+  </div>
 
 </div>
 
