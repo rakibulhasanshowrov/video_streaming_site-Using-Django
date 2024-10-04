@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponseRedirect,redirect
+from django.shortcuts import render,HttpResponseRedirect,redirect,get_object_or_404
 from django.urls import reverse_lazy,reverse
 from django.contrib.auth.decorators import login_required
 # Messages
@@ -66,31 +66,44 @@ def vid_search(request):
         messages.error(request,"Nothing Found!!")
         return HttpResponseRedirect(reverse('app_video:homepage'))
     
-def vid_details(request,pk):
-    video=Video.objects.all().exclude(pk=pk).order_by('?')
-    vid_q=Video.objects.get(pk=pk)
-    comments=Comment.objects.filter(commented_video=vid_q)
-    form=CommentForm()
-    if request.method=="POST":
-        form=CommentForm(data=request.POST)
-        if form.is_valid():
-            comment=form.save(commit=False)
-            comment.user=request.user
-            comment.commented_video=vid_q
-            comment.save()
-            messages.success(request,"Comment Added Successfully!!")
-            return render(request,'app_video/video_details.html',context={
-            'video':video,
-            'vid_q':vid_q,
-            'comments':comments,
-            'form':form,})
+def vid_details(request, pk):
+    # Fetch other videos, excluding the current one
+    video = Video.objects.all().exclude(pk=pk).order_by('?')
+
+    # Fetch the video being viewed
+    vid_q = get_object_or_404(Video, pk=pk)
+
+    # Fetch comments for the current video
+    comments = Comment.objects.filter(commented_video=vid_q)
+
+    # Initialize the comment form
+    form = CommentForm()
+
+    if request.method == "POST":
+        if request.user.is_authenticated:
+            form = CommentForm(data=request.POST)  # Populate form with POST data
+            if form.is_valid(): 
+                comment = form.save(commit=False)
+                comment.user = request.user  # Set the user
+                comment.commented_video = vid_q  # Associate comment with the current video
+                comment.save()
+
+                messages.success(request, "Comment Added Successfully!!")
+
+                # Redirect to the same page to prevent duplicate form submissions
+                return redirect(reverse('app_video:vid_details', kwargs={'pk': pk}))
+            else:
+                messages.error(request, "Comment Not Added!!")
         else:
-            messages.error(request,"Comment Not Added!!")                   
-    return render(request,'app_video/video_details.html',context={
-        'video':video,
-        'vid_q':vid_q,
-        'comments':comments,
-        'form':form
+            messages.error(request, "Please Login First!!")
+            return redirect(reverse('user_handle:login_user'))  # Redirect to login if not authenticated
+
+    # Render the page with the video details and comment form
+    return render(request, 'app_video/video_details.html', context={
+        'video': video,
+        'vid_q': vid_q,
+        'comments': comments,
+        'form': form,
     })
          
 

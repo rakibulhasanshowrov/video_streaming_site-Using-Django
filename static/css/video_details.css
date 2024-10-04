@@ -173,17 +173,18 @@
   margin-top: 15px;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   border-radius: 10px;
   
+} 
 .user_img{
-  width: 10%;
+  width: 45px;
   height: auto;
+  margin-right: 3px;
 
 }
 .user_img img{
-  height: 60px;
-  width: 80%;
+  height: 50px;
+  width: 45px;
   border-radius: 50px;
 }
 .comment_details{
@@ -194,4 +195,5 @@
 .comment_text{
   margin-top: 3px;
   margin-bottom: 5px;
+  width: auto;
 }
