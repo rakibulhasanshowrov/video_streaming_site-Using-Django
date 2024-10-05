@@ -135,7 +135,7 @@ MEDIA_URL='/media/'
 
 
 #LOGIN URL
-LOGIN_URL = 'account/login/'
+LOGIN_URL = '/account/login/'
 # Expire the session when the user closes the browser
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 # Set session timeout to 30 minutes (1800 seconds)

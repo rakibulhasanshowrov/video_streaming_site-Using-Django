@@ -14,6 +14,7 @@ def homepage(request):
   video=Video.objects.all().order_by('?')
   return render(request,'app_video/video_list.html',context={'video':video})
 
+@login_required
 def get_youtube_thumbnail(url):
     # Extract the video ID from the URL
     video_id = url.split('v=')[1]
@@ -25,7 +26,7 @@ def get_youtube_thumbnail(url):
     thumbnail_url = f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg"
     return thumbnail_url
 
-
+@login_required
 def add_video(request):
     # Only allow superusers to access this view
     if not request.user.is_superuser:
