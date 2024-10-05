@@ -24,6 +24,7 @@ def login_user(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, "Login Successful!")
+                return HttpResponseRedirect(reverse('app_video:homepage'))
             else:
                 # Authentication failed, display error
                 messages.error(request, "Invalid username or password.")
