@@ -7,9 +7,9 @@ class UserProfile(models.Model):
   dob=models.DateField(blank=True,null=True)
   profile_pic=models.ImageField(upload_to='profile_pics',blank=True)
   type=[
-    ('teacher','Teacher'),
-    ('student','Student'),
-    ('Genaral_user','General User'), 
+    ('Genaral_user','General User'),
+    ('Teacher','Teacher'),
+    ('Student','Student'),  
   ]
   profile_type=models.CharField(max_length=30,blank=False,choices=type,default="General User")
   

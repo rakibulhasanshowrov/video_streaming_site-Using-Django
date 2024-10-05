@@ -31,5 +31,13 @@ class UserProfileForm(forms.ModelForm):
   class Meta:
     model=UserProfile
     fields='__all__'
-    
+    exclude=['user']
+    widgets={
+      'dob':forms.DateInput(attrs={'type': 'date','class':'date_input'}),
+      'profile_pic':forms.FileInput(attrs={'class':'file_input',}),
+      'profile_type':forms.Select(attrs={'class':'choice_input',})
+    }
+    labels = {
+            'dob': 'Date Of Birth',  # This removes the label
+        }
     

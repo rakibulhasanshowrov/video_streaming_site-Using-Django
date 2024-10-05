@@ -1,0 +1,23 @@
+{% extends 'base.html'%}
+{%load crispy_forms_tags %}
+{%load static%}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/edit_profile.css' %}">
+{%endblock%}
+{%block title%}Edit Profile{%endblock%}
+{%block content%}
+<div class="edit_profile_container">
+  <div class="form_container">
+    <form action=""method='POST' enctype="multipart/form-data">
+      {{form|crispy}}
+      {%csrf_token%}
+      <button class='submit_button' type="submit">Update</button>
+  </form>
+
+  </div>
+  
+
+</div>
+
+
+{%endblock%}
